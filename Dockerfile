@@ -1,4 +1,17 @@
-FROM python:3.6-alpine
-RUN pip install gunicorn
-COPY server.py /server.py
-ENTRYPOINT ["gunicorn"  , "-b", "0.0.0.0:8000", "server:app"]
+FROM ubuntu:16.04
+
+RUN apt-get update -y && \
+    apt-get install -y python-pip python-dev
+
+# We copy just the requirements.txt first to leverage Docker cache
+COPY ./requirements.txt /server/requirements.txt
+
+WORKDIR /server
+
+RUN pip install -r requirements.txt
+
+COPY . /server
+
+ENTRYPOINT [ "python" ]
+
+CMD [ "server.py" ]
