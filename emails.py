@@ -8,7 +8,7 @@ from email.mime.text import MIMEText
 
 
 def sendEmail(to, content):
-    msg = MIMEText("We are searching for result for your search: " + content + "\n"
+    msg = MIMEText("We are searching results for your search: " + content + "\n"
                    + "An email with our algorithm's results will be send to your email address : " + to + " soon.")
     msg['Subject'] = "Search request submitted"
     msg['From'] = "coin.project@sandboxcf29099671c7490eb8f0475d59ba01a7.mailgun.org"
